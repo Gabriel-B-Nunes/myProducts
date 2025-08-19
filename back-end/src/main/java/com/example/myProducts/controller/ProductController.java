@@ -1,4 +1,5 @@
 package com.example.myProducts.controller;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -24,11 +25,17 @@ import com.example.myProducts.service.ProductMapper;
 
 import jakarta.validation.Valid;
 
+import org.slf4j.MDC;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @RestController
 @RequestMapping("/products")
 public class ProductController {
+
     //variable declaration
     private final ProductRepository repository;
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     //dependency injection
     ProductController(ProductRepository repository) {
@@ -36,6 +43,13 @@ public class ProductController {
     }
 
     //methods
+    @GetMapping("/test-log")
+    public String testLog() {
+        logger.debug("⚡ DEBUG do controller funcionando!");
+        logger.info("ℹ INFO do controller funcionando!");
+        return "ok";
+    }
+
     @GetMapping
     public ResponseEntity<?> findAllProducts() {
         List<Product> listProduct = repository.findAll();
@@ -64,6 +78,17 @@ public class ProductController {
     public ResponseEntity<ProductResponseDTO> createProduct(@Valid @RequestBody ProductCreateDTO productCreateDTO) {
         Product product = new Product(productCreateDTO);
         repository.save(product);
+        
+        try {
+            MDC.put("old", "null");
+            MDC.put("new", product.toString());
+            logger.info("Product created: {}", product.toString());
+        } catch (Exception e) {
+            logger.error("Error saving product: {}", e.getMessage());
+        } finally {
+            MDC.clear();
+        }
+
         return new ResponseEntity(ProductMapper.toResponseDTO(product), HttpStatus.CREATED);
     }
     
@@ -75,6 +100,17 @@ public class ProductController {
         }
 
         repository.deleteById(productOpt.get().getId());
+
+        try {
+            MDC.put("old", productOpt.get().toString());
+            MDC.put("new", "null");
+            logger.info("Product deleted: {}", productOpt.get().toString());
+        } catch (Exception e) {
+            logger.error("Error deleting product: {}", e.getMessage());
+        } finally {
+            MDC.clear();
+        }
+
         return new ResponseEntity(ProductMapper.toDetailDTO(productOpt.get()), HttpStatus.OK);
     }
 
@@ -84,8 +120,21 @@ public class ProductController {
         if (productOpt.isEmpty()) {
             throw new ProductNotFoundException(id);
         }
-
+        
+        Product oldProduct = new Product(productOpt.get());
+        productOpt.get().updateProduct(productUpdateDTO);
         repository.save(productOpt.get());
+
+        try {
+            MDC.put("old", oldProduct.toString());
+            MDC.put("new", productOpt.get().toString());
+            logger.info("Product updated: {}", productOpt.get().toString());
+        } catch (Exception e) {
+            logger.error("Error updating product: {}", e.getMessage());
+        } finally {
+            MDC.clear();
+        }
+
         return new ResponseEntity(ProductMapper.toDetailDTO(productOpt.get()), HttpStatus.OK);
     }
 }

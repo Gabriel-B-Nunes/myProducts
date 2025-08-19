@@ -1,0 +1,23 @@
+<configuration scan="true">
+
+	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>/app/logs/logfile.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>/app/logs/%d{MM-yyyy, aux}/logfile.%d{dd-MM-yyyy}.log</fileNamePattern>
+		</rollingPolicy>
+		<encoder class = "ch.qos.logback.classic.encoder.JsonEncoder">
+			<withFormattedMessage>true</withFormattedMessage>
+			<withMessage>false</withMessage>
+			<withArguments>false</withArguments>
+		</encoder>
+	</appender>
+	
+	<logger name = "com.example.myProducts.controller" level = "INFO" additivity = "false">
+		<appender-ref ref = "FILE"/>
+	</logger>
+
+	<root level="OFF">
+		<appender-ref ref = "FILE"/>
+	</root>
+	
+</configuration>

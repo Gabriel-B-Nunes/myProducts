@@ -59,7 +59,18 @@ public class Product implements Serializable {
         this.weight = produtoUpdateDTO.getWeight();
         this.brand = produtoUpdateDTO.getBrand();
         this.quantity = produtoUpdateDTO.getQuantity();
-        this.changeDate = LocalDate.now();
+        this.creationDate = LocalDate.now();
+    }
+
+    public Product(Product product) {
+        this.description = product.getDescription();
+        this.validityDate = product.getValidityDate();
+        this.fabricationDate = product.getFabricationDate();
+        this.weight = product.getWeight();
+        this.brand = product.getBrand();
+        this.quantity = product.getQuantity();
+        this.creationDate = product.getCreationDate();
+        this.changeDate = product.getChangeDate();
     }
 
     public void updateProduct(ProductUpdateDTO produtoUpdateDTO) {
@@ -70,6 +81,13 @@ public class Product implements Serializable {
         this.brand = produtoUpdateDTO.getBrand();
         this.quantity = produtoUpdateDTO.getQuantity();
         this.changeDate = LocalDate.now();
+    }
+
+    @Override
+    public String toString() {
+        return "{\"id\":" + id + ", \"description\":" + description + ", \"validityDate\":" + validityDate
+                + ", \"fabricationDate\":" + fabricationDate + ", \"weight\":" + weight + ", \"brand\":" + brand
+                + ", \"quantity\":" + quantity + ", \"creationDate\":" + creationDate + ", \"changeDate\":" + changeDate + "}";
     }
 
     public Long getId() {
