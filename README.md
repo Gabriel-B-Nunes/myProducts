@@ -5,8 +5,8 @@
 
 ## :pushpin:    Table of contents
 
-* [About] (#-about)
-* [How to build] (#-how-to-build)
+* [About](#-about)
+* [How to build](#-how-to-build)
 
 ## :rocket: About
 
