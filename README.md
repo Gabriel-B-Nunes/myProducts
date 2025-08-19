@@ -1,4 +1,1 @@
-TODO:
-    back-end
-        Logger:
-            - criar
+TODO: update README with application details.
