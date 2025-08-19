@@ -11,8 +11,10 @@ import com.example.myProducts.model.Product;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
+    //query by product ID
     Optional<Product> findById(long id);
 
+    //query by products brand
     List<Product> findByBrand(String brand);
 
 }

@@ -2,6 +2,7 @@ package com.example.myProducts.exceptions;
 
 public class ProductNotFoundException extends RuntimeException{
 
+    //constructors
     public ProductNotFoundException(Long id) {
         super("Product with ID " + id + " not found");
     }

@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import com.example.myProducts.model.Product;
 
 public class ProductResponseDTO {
+
+    //variables
     private String description;
     private LocalDate validityDate;
     private LocalDate fabricationDate;
@@ -14,6 +16,7 @@ public class ProductResponseDTO {
     private LocalDate creationDate;
     private LocalDate changeDate;
 
+    //constructors
     public ProductResponseDTO() {}
 
     public ProductResponseDTO(Product produto) {
@@ -27,6 +30,7 @@ public class ProductResponseDTO {
         this.changeDate = produto.getChangeDate();
     }
 
+    //getters and setters
     public String getDescription() {
         return description;
     }

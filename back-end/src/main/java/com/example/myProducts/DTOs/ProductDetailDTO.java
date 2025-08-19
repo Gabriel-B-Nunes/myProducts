@@ -6,6 +6,8 @@ import java.util.List;
 import com.example.myProducts.model.Product;
 
 public class ProductDetailDTO {
+
+    //variables
     private Long id;
     private String description;
     private LocalDate validityDate;
@@ -16,6 +18,7 @@ public class ProductDetailDTO {
     private LocalDate creationDate;
     private LocalDate changeDate;
 
+    //constructors
     public ProductDetailDTO() {}
 
     public ProductDetailDTO(Product produto) {
@@ -30,10 +33,12 @@ public class ProductDetailDTO {
         this.changeDate = produto.getChangeDate();
     }
 
+    //methods
     public static List<ProductDetailDTO> fromList(List<Product> listProduto) {
         return listProduto.stream().map(ProductDetailDTO::new).toList();
     }
 
+    //getters and setters
     public Long getId() {
         return id;
     }

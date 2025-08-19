@@ -4,12 +4,14 @@ import java.time.LocalDate;
 
 public class ErrorResponse {
 
+    //variables
     private LocalDate timestamp;
     private int status;
     private String error;
     private String message;
     private String path;
 
+    //constructors
     public ErrorResponse(int status, String error, String message, String path) {
         this.timestamp = LocalDate.now();
         this.status = status;
@@ -18,6 +20,7 @@ public class ErrorResponse {
         this.path = path;
     }
 
+    //getters and setters
     public LocalDate getTimestamp() {
         return timestamp;
     }

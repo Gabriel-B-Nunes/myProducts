@@ -7,6 +7,7 @@ import com.example.myProducts.model.Product;
 
 public class ProductMapper {
 
+    //methods
     public static Product toEntity(ProductCreateDTO productCreateDTO) {
         return new Product(productCreateDTO);
     }

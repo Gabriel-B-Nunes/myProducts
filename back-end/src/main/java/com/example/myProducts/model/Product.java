@@ -18,6 +18,7 @@ import jakarta.persistence.Table;
 @Table
 public class Product implements Serializable {
 
+    //variables
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
@@ -50,6 +51,7 @@ public class Product implements Serializable {
     @JsonFormat(pattern="dd/MM/yyyy")
     private LocalDate changeDate;
 
+    //constructors
     public Product() {}
 
     public Product(ProductCreateDTO produtoUpdateDTO) {
@@ -73,6 +75,7 @@ public class Product implements Serializable {
         this.changeDate = product.getChangeDate();
     }
 
+    //methods
     public void updateProduct(ProductUpdateDTO produtoUpdateDTO) {
         this.description = produtoUpdateDTO.getDescription();
         this.validityDate = produtoUpdateDTO.getValidityDate();
@@ -90,6 +93,7 @@ public class Product implements Serializable {
                 + ", \"quantity\":" + quantity + ", \"creationDate\":" + creationDate + ", \"changeDate\":" + changeDate + "}";
     }
 
+    //getters and setters
     public Long getId() {
         return id;
     }

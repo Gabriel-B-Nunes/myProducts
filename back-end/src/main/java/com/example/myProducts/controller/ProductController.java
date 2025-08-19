@@ -33,11 +33,11 @@ import org.slf4j.LoggerFactory;
 @RequestMapping("/products")
 public class ProductController {
 
-    //variable declaration
+    //variables
     private final ProductRepository repository;
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    //dependency injection
+    //constructors
     ProductController(ProductRepository repository) {
         this.repository = repository;
     }

@@ -23,10 +23,12 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 @Component
 public class LogAspect {
     
+    //variables
     private final ObjectMapper mapper = new ObjectMapper()
         .registerModule(new JavaTimeModule());
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    //methods
     @Pointcut("execution(* com.example.myProducts.controller..*(..))")
     public void pointCut() {}
 

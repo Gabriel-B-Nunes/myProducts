@@ -10,6 +10,7 @@ import jakarta.validation.constraints.Positive;
 
 public class ProductUpdateDTO {
 
+    //variables
     @NotBlank(message= "Description cannot be blank")
     private String description;
 
@@ -31,8 +32,10 @@ public class ProductUpdateDTO {
     @Positive(message= "Quantity cannot be negative")
     private int quantity;
 
+    //constructors
     public ProductUpdateDTO() {}
 
+    //getters and setters
     public String getDescription() {
         return description;
     }
