@@ -43,13 +43,6 @@ public class ProductController {
     }
 
     //methods
-    @GetMapping("/test-log")
-    public String testLog() {
-        logger.debug("⚡ DEBUG do controller funcionando!");
-        logger.info("ℹ INFO do controller funcionando!");
-        return "ok";
-    }
-
     @GetMapping
     public ResponseEntity<?> findAllProducts() {
         List<Product> listProduct = repository.findAll();
@@ -91,7 +84,7 @@ public class ProductController {
 
         return new ResponseEntity(ProductMapper.toResponseDTO(product), HttpStatus.CREATED);
     }
-    
+
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteProduct(@PathVariable Long id) {
         Optional<Product> productOpt = repository.findById(id);
@@ -137,4 +130,5 @@ public class ProductController {
 
         return new ResponseEntity(ProductMapper.toDetailDTO(productOpt.get()), HttpStatus.OK);
     }
+    
 }

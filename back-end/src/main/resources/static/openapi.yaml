@@ -1,0 +1,184 @@
+openapi: 3.0.4
+info:
+  title: myProducts
+  description: A simple REST API on the context of products.
+  version: 1.0.0
+  contact:
+    name: API support
+    email: gabrielbeckernunes@gmail.com
+
+servers:
+  - url: http://localhost:8080
+
+tags:
+  - name: products
+  - name: products/brand
+
+paths:
+  /products:
+    post:
+      tags:
+        - products
+      summary: Creates a new product.
+      parameters:
+        - in: header
+          name: Content-type
+          required: true
+          schema:
+            type: string
+            default: application/json
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              description: test
+              validityDate: 31/12/2025
+              fabricationDate: 01/01/2025
+              weight: 1
+              brand: test
+              quantity: 1
+      responses:
+        "201":
+          description: A JSON with all the data sent in the request body plus creationDate and changeDate.
+          content:
+            application/json:
+              example:
+                description: test
+                validityDate: 31/12/2025
+                fabricationDate: 01/01/2025
+                weight: 1
+                brand: test
+                quantity: 1
+                creationDate: 21/08/2025
+                changeDate: null
+                
+  /products/{id}:
+    get:
+      tags:
+        - products
+      summary: Gets a product.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: A JSON from the product with all the data.
+          content:
+            application/json:
+              example:
+                id: 1
+                description: test
+                validityDate: 31/12/2025
+                fabricationDate: 01/01/2025
+                weight: 1
+                brand: test
+                quantity: 1
+                creationDate: 21/08/2025
+                changeDate: null
+    put:
+      tags:
+        - products
+      summary: Updates a product.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              description: testPut
+              validityDate: 31/12/2025
+              fabricationDate: 01/01/2025
+              weight: 1
+              brand: test
+              quantity: 1
+      responses:
+        "200":
+          description: A JSON from the updated product with changeDate filled.
+          content:
+            application/json:
+              example:
+                id: 1
+                description: testPut
+                validityDate: 31/12/2025
+                fabricationDate: 01/01/2025
+                weight: 1
+                brand: test
+                quantity: 1
+                creationDate: 21/08/2025
+                changeDate: 21/08/2025
+    delete:
+      tags:
+        - products
+      summary: Deletes a product.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: A JSON from the deleted product.
+          content:
+            application/json:
+              example:
+                id: 1
+                description: test
+                validityDate: 31/12/2025
+                fabricationDate: 01/01/2025
+                weight: 1
+                brand: test
+                quantity: 1
+                creationDate: 21/08/2025
+                changeDate: null
+  
+  /products/brand/{brand}:
+    get:
+      tags:
+        - products/brand
+      summary: Gets all the products from the informed brand.
+      parameters:
+        - in: path
+          name: brand
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: An array with the JSON from all the products of the informed brand within.
+          content:
+            application/json:
+              example:
+                [
+                {
+                  id: 1,
+                  description: test,
+                  validityDate: 31/12/2025,
+                  fabricationDate: 01/01/2025,
+                  weight: 1,
+                  brand: test,
+                  quantity: 1,
+                  creationDate: 21/08/2025,
+                  changeDate: null,
+                },
+                {
+                  id: 2,
+                  description: test2,
+                  validityDate: 31/12/2025,
+                  fabricationDate: 01/01/2025,
+                  weight: 1,
+                  brand: test,
+                  quantity: 1,
+                  creationDate: 21/08/2025,
+                  changeDate: null,
+                }
+                ]
